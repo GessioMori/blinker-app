@@ -3,19 +3,34 @@
 @tailwind utilities;
 
 body {
-  background-image: linear-gradient(
-    60deg,
-    #30104a,
-    #2f104b,
-    #2e104c,
-    #2d114d,
-    #2c114e,
-    #28134d,
-    #25144d,
-    #21154c,
-    #1b1749,
-    #151845,
-    #101941,
-    #0c193d
-  );
+  background: #181817;
+}
+
+.glow-container:after {
+  position: absolute;
+  content: "";
+  inset: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  transform: scale(0.8);
+  -webkit-filter: blur(15vw);
+  -moz-filter: blur(15vw);
+  -ms-filter: blur(15vw);
+  filter: blur(15vw);
+  background: linear-gradient(270deg, #f07e6e, #84cdfa, #5ad1cd);
+  background-size: 300% 300%;
+  animation: animateGlow 5s ease infinite;
+}
+@keyframes animateGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
