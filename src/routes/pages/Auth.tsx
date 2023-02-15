@@ -16,7 +16,7 @@ export const Auth = () => {
         <p className="text-4xl font-bold text-zinc-400 ">BLINKER</p>
         {accountCreated && (
           <p className="w-full text-left text-sm text-zinc-400">
-            Your account has been created! You can now log in.
+            Your account has been created!
           </p>
         )}
         {isLogin ? (
@@ -41,12 +41,12 @@ export const Auth = () => {
           {isLogin ? (
             <>
               <UserCircle size={18} />
-              Don't have an account? Create one instead!
+              Sign up
             </>
           ) : (
             <>
               <SignIn size={18} />
-              Already have an account? Log in!
+              Log in
             </>
           )}
         </button>

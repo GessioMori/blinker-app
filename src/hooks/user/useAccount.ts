@@ -1,6 +1,6 @@
 import { useMutation } from "react-query";
-import { createAccount } from "../api/user";
-import { CreateAccountDataType } from "../validators/schemas/user";
+import { createAccount } from "../../api/user";
+import { CreateAccountDataType } from "../../validators/schemas/user";
 
 export const useAccount = () =>
   useMutation({

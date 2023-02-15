@@ -5,11 +5,13 @@ import { InputError } from "./InputError";
 import { PasswordInput } from "./PasswordInput";
 import { TextInput } from "./TextInput";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useLogin } from "../hooks/useLogin";
-import { Navigate } from "react-router-dom";
+import { useLogin } from "../hooks/user/useLogin";
+import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 
 export const LoginForm = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -19,28 +21,28 @@ export const LoginForm = () => {
     resolver: zodResolver(LoginSchema),
   });
 
-  const { mutateAsync, data: isLoggedIn, isLoading } = useLogin();
+  const { mutateAsync, isLoading } = useLogin();
 
   const onSubmit: SubmitHandler<LoginDataType> = (data) => {
     const { email, password } = data;
-    mutateAsync({ email, password }).catch((error) => {
-      if (error instanceof AxiosError && error.response?.status === 401) {
-        setError("password", {
-          type: "manual",
-          message: "Username and/or password incorrect",
-        });
-      } else {
-        setError("password", {
-          type: "manual",
-          message: "Some error happened, try again later",
-        });
-      }
-    });
+    mutateAsync({ email, password })
+      .then(() => {
+        navigate("/", { replace: true });
+      })
+      .catch((error) => {
+        if (error instanceof AxiosError && error.response?.status === 401) {
+          setError("password", {
+            type: "manual",
+            message: "Username and/or password incorrect",
+          });
+        } else {
+          setError("password", {
+            type: "manual",
+            message: "Some error happened, try again later",
+          });
+        }
+      });
   };
-
-  if (isLoggedIn !== undefined) {
-    return <Navigate to={"/"} />;
-  }
 
   return (
     <form

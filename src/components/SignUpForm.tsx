@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
 import { Hourglass, UserCircle } from "phosphor-react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useAccount } from "../hooks/useAccount";
+import { useAccount } from "../hooks/user/useAccount";
 import {
   CreateAccountDataType,
   CreateAccountSchema,

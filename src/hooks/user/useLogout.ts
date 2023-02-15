@@ -1,5 +1,5 @@
 import { useMutation } from "react-query";
-import { logout } from "../api/user";
+import { logout } from "../../api/user";
 
 export const useLogout = () =>
   useMutation({
