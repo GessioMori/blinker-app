@@ -1,16 +1,16 @@
-### BLINKER - Link saver and blog scraper
+# BLINKER - Link saver and blog scraper
 
 This repository contains the source code for the front-end of the Blinker project. It allows you to save links, scrapes blogs for new posts and shortens the links. It is written in TypeScript, using React, Vite, TailwindCSS, react-router and react-query.
-
-
-
-https://user-images.githubusercontent.com/58918025/219456355-0e1e98bc-241a-45ea-93c6-ad24fb924dae.mp4
-
-
 
 - [APP](https://blinker.gm3.tech)
 - [API DOCUMENTATION](https://gm3.tech/blinker/api-docs/)
 - [BACK-END REPOSITORY](https://github.com/GessioMori/blinker-api)
+
+
+## DEMO
+
+https://user-images.githubusercontent.com/58918025/219456355-0e1e98bc-241a-45ea-93c6-ad24fb924dae.mp4
+
 
 ## Features
 
