@@ -2,7 +2,7 @@
 
 This repository contains the source code for the front-end of the Blinker project. It allows you to save links, scrapes blogs for new posts and shortens the links. It is written in TypeScript, using React, Vite, TailwindCSS, react-router and react-query.
 
-![](https://github.com/GessioMori/blinker-api/blob/main/example.png?raw=true)
+![](https://github.com/GessioMori/blinker-app/blob/main/example.png?raw=true)
 
 - [APP](https://blinker.gm3.tech)
 - [API DOCUMENTATION](https://gm3.tech/blinker/api-docs/)
