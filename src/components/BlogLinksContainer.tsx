@@ -1,8 +1,8 @@
-import { useGetPrivateLinks } from "../hooks/privateLink/useGetPrivateLinks";
-import { PrivateLink } from "./PrivateLink";
+import { useGetBlogLinks } from "../hooks/blogLink/useGetBlogLinks";
+import { BlogLink } from "./BlogLink";
 
-export const PrivateLinksContainer = () => {
-  const { data, isLoading } = useGetPrivateLinks();
+export const BlogLinksContainer = () => {
+  const { data, isLoading } = useGetBlogLinks();
 
   if (data) {
     return (
@@ -10,11 +10,11 @@ export const PrivateLinksContainer = () => {
         {data
           .sort((a, b) => {
             return (
-              new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
             );
           })
           .map((link) => (
-            <PrivateLink key={link.id} link={link} />
+            <BlogLink key={link.id} link={link} />
           ))}
       </div>
     );

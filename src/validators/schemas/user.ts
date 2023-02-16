@@ -42,3 +42,12 @@ export const UpdateSubscriptionsSchema = z.object({
 export type UpdateSubscriptionsDataType = z.infer<
   typeof UpdateSubscriptionsSchema
 >;
+
+export const UserSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  email: z.string(),
+  subscriptions: z.array(BlogProviders),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
+});

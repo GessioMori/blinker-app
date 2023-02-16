@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Hourglass, PlusCircle, XCircle } from "phosphor-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useCreatePrivateLink } from "../hooks/privateLink/useCreatePrivateLink";
+import { useUpdatePrivateLink } from "../hooks/privateLink/useUpdatePrivateLink";
 import {
   PrivateLinkBaseSchema,
   PrivateLinkBaseType,
@@ -9,12 +10,18 @@ import {
 import { InputError } from "./InputError";
 import { TextInput } from "./TextInput";
 
-interface CreateLinkModalProps {
+interface UpdateLinkModalProps {
   onClose: () => void;
+  title: string;
+  url: string;
+  id: number;
 }
 
-export const CreateLinkModal: React.FC<CreateLinkModalProps> = ({
+export const UpdateLinkModal: React.FC<UpdateLinkModalProps> = ({
   onClose,
+  title,
+  url,
+  id,
 }) => {
   const {
     register,
@@ -23,12 +30,16 @@ export const CreateLinkModal: React.FC<CreateLinkModalProps> = ({
     setError,
   } = useForm<PrivateLinkBaseType>({
     resolver: zodResolver(PrivateLinkBaseSchema),
+    defaultValues: {
+      title,
+      url,
+    },
   });
 
-  const { mutateAsync, isLoading } = useCreatePrivateLink();
+  const { mutateAsync, isLoading } = useUpdatePrivateLink();
 
   const onSubmit: SubmitHandler<PrivateLinkBaseType> = async (data) => {
-    await mutateAsync(data)
+    await mutateAsync({ ...data, id })
       .then(() => onClose())
       .catch((error) => {
         setError("url", {
@@ -45,7 +56,7 @@ export const CreateLinkModal: React.FC<CreateLinkModalProps> = ({
       rounded-md bg-neutral-900 p-4 opacity-100"
       >
         <h1 className="text-lg font-bold text-neutral-200">
-          Create private link
+          Update this private link
         </h1>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -68,7 +79,7 @@ export const CreateLinkModal: React.FC<CreateLinkModalProps> = ({
               disabled={isLoading}
             >
               {isLoading ? <Hourglass size={18} /> : <PlusCircle size={18} />}
-              {isLoading ? "Creating" : "Create"}
+              {isLoading ? "Updating" : "Update"}
             </button>
             <button
               type="button"

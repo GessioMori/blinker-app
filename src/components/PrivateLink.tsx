@@ -5,9 +5,10 @@ import {
   PencilSimple,
   TrashSimple,
 } from "phosphor-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDeletePrivateLink } from "../hooks/privateLink/useDeletePrivateLink";
 import { PrivateLinkType } from "../validators/schemas/privateLink";
+import { UpdateLinkModal } from "./UpdateLinkModal";
 
 interface PrivateLinkProps {
   link: PrivateLinkType;
@@ -17,9 +18,10 @@ export const PrivateLink: React.FC<PrivateLinkProps> = ({
   link: { title, url, slug, id },
 }) => {
   const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [isUpdateLinkModalOpen, setIsUpdateLinkModalOpen] = useState(false);
 
   const handleCopy = async () => {
-    //await navigator.clipboard.writeText(`https://linkr.com/${slug}`);
+    await navigator.clipboard.writeText(`https://gm3.tech/blinker/pl/${slug}`);
     setIsAlertVisible(true);
     setTimeout(() => {
       setIsAlertVisible(false);
@@ -39,23 +41,26 @@ export const PrivateLink: React.FC<PrivateLinkProps> = ({
         <div>{title}</div>
         <div className="flex w-full justify-around sm:w-40">
           <a href={url} target="_blank" rel="noopener noreferrer">
-            <button className="rounded-md  p-2 text-neutral-100">
+            <button className="rounded-md  border-2 border-transparent p-1 text-neutral-100 hover:border-neutral-100">
               <ArrowElbowUpRight />
             </button>
           </a>
           <button
-            className="rounded-md  p-2 text-neutral-100"
+            className="rounded-md  border-2 border-transparent p-1 text-neutral-100 hover:border-neutral-100"
             onClick={() => {
               handleCopy();
             }}
           >
             <Copy />
           </button>
-          <button className="rounded-md  p-2 text-neutral-100">
+          <button
+            onClick={() => setIsUpdateLinkModalOpen(true)}
+            className="rounded-md  border-2 border-transparent p-1 text-neutral-100 hover:border-neutral-100"
+          >
             <PencilSimple />
           </button>
           <button
-            className="rounded-md  p-2 text-neutral-100"
+            className="rounded-md  border-2 border-transparent p-1 text-neutral-100 hover:border-neutral-100"
             onClick={() => handleDelete()}
           >
             {isLoadingDelete ? <Hourglass /> : <TrashSimple />}
@@ -70,6 +75,14 @@ export const PrivateLink: React.FC<PrivateLinkProps> = ({
         >
           <span className="font-medium">Link copied to clipboard!</span>
         </div>
+      )}
+      {isUpdateLinkModalOpen && (
+        <UpdateLinkModal
+          onClose={() => setIsUpdateLinkModalOpen(false)}
+          id={id}
+          title={title}
+          url={url}
+        />
       )}
     </>
   );

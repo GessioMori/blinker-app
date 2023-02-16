@@ -14,7 +14,7 @@ export const Header = () => {
   }
 
   return (
-    <header className="flex h-full items-center justify-between py-4 px-8">
+    <header className="flex h-full w-full items-center justify-between py-4 px-8">
       <div className="flex items-center gap-4">
         <div className="text-2xl font-bold text-zinc-400">BLINKER</div>
       </div>

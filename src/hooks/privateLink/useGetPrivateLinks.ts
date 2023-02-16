@@ -5,4 +5,5 @@ export const useGetPrivateLinks = () =>
   useQuery({
     queryFn: () => getPrivateLinks(),
     queryKey: ["privateLinks"],
+    keepPreviousData: true,
   });
